@@ -1,0 +1,340 @@
+/* HEADER - Mobile First Approach */
+.header {
+  background-color: var(--background-color);
+  padding: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  font-family: var(--font-logo);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #ff9933;
+}
+
+.logo-image {
+  margin-right: 8px;
+  height: 32px;
+  width: auto;
+}
+
+/* Mobile-first navigation menu */
+.nav-menu {
+  position: fixed;
+  left: -100%;
+  top: 40px;
+  flex-direction: column;
+  background-color: #2c2c2c;
+  width: 100%;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+  padding: 20px 0;
+  list-style: none;
+  gap: 18px;
+  display: flex;
+  z-index: 1000
+}
+
+.nav-menu.active {
+  left: 0;
+}
+
+.nav-item a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-item a:hover {
+  color: #ff7b00;
+}
+
+.nav-item a.active {
+  color: #ff7b00;
+}
+
+.nav-item a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff7b00;
+  transition: width 0.3s ease;
+}
+
+.nav-item a:hover::after,
+.nav-item a.active::after {
+  width: 100%;
+}
+
+.download-btn {
+  background-color: #ff7b00;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.download-btn:hover {
+  background-color: #e66a00;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 123, 0, 0.3);
+}
+
+.download-btn:active {
+  transform: translateY(0);
+}
+
+.mobile-menu-toggle {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 4px;
+  position: relative;
+  right: 0;
+  z-index: 1001;
+}
+
+
+.mobile-menu-toggle span { /* Hamburger Icon */
+  width: 28px;
+  height: 4px;
+  background-color: #ffffff;
+  margin: 2px 0;
+  transition: 0.3s;
+}
+
+
+.desktop-only {
+ display: none;
+}
+
+.mobile-only {
+  display: block;
+}
+
+/* Tablet styles */
+@media (min-width: 769px) {
+  .nav-container {
+    max-width: 900px;
+    padding: 14px 18px;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .logo-image {
+    margin-right: 9px;
+    height: 36px;
+  }
+
+  .nav-menu {
+    position: static;
+    flex-direction: row;
+    background-color: transparent;
+    width: auto;
+    box-shadow: none;
+    padding: 0;
+    gap: 30px;
+    left: 0;
+    top: auto;
+  }
+
+  .nav-item a {
+    font-size: 15px;
+  }
+
+  .nav-item a::after {
+    left: 0;
+    transform: none;
+  }
+
+  .download-btn {
+    padding: 11px 20px;
+    font-size: 13px;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+  }
+
+  .desktop-only {
+    display: inline-block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+
+  .language-toggle.desktop-only {
+    display: flex;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1025px) {
+  .nav-container {
+    max-width: 1200px;
+    padding: 15px 20px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .logo-image {
+    margin-right: 10px;
+    height: 40px;
+  }
+
+  .nav-menu {
+    gap: 40px;
+  }
+
+  .nav-item a {
+    font-size: 16px;
+  }
+
+  .download-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+/* Language Toggle Functionality */
+/* Hide all language content by default */
+.lang-content {
+  display: none;
+}
+
+/* Show Norwegian content when data-lang="no" */
+body[data-lang="no"] .lang-content.lang-no {
+  display: inline;
+}
+
+/* Show English content when data-lang="en" */
+body[data-lang="en"] .lang-content.lang-en {
+  display: inline;
+}
+
+/* For block-level elements that need language switching */
+.lang-content-block {
+  display: none;
+}
+
+body[data-lang="no"] .lang-content-block.lang-no {
+  display: block;
+}
+
+body[data-lang="en"] .lang-content-block.lang-en {
+  display: block;
+}
+
+/* Language Toggle Button Styles */
+.language-toggle {
+  display: flex;
+  background-color: #3a3a3a;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  height: 36px;
+  padding: 2px;
+  gap: 0;
+}
+
+.lang-option {
+  padding: 6px 14px;
+  cursor: pointer;
+  color: #999;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+}
+
+.lang-option:hover {
+  color: #fff;
+}
+
+.lang-option.active {
+  background-color: #ff7b00;
+  color: #fff;
+}
+
+/* Mobile version of language toggle */
+.language-toggle.mobile-version {
+  margin-top: 10px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive adjustments */
+@media (min-width: 769px) {
+  .language-toggle {
+    height: 38px;
+  }
+  
+  .lang-option {
+    padding: 7px 16px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .language-toggle {
+    height: 40px;
+  }
+  
+  .lang-option {
+    padding: 8px 18px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .language-toggle.desktop-only {
+    display: none !important;
+  }
+}
